@@ -13,6 +13,7 @@ export class AppComponent implements OnInit {
   title = 'Currency exchange rate';
   resources = resourcesList;
   rate = 'pending';
+  requestInterval = 10 * 1000;
 
   constructor(
     private _requestService: RequestService
@@ -21,7 +22,7 @@ export class AppComponent implements OnInit {
 
   ngOnInit() {
     this.makeRequest(0);
-    interval(10 * 1000)
+    interval(this.requestInterval)
       .pipe(
         tap(() => this.makeRequest(0))
       )
